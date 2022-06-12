@@ -1,0 +1,72 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+run_linter () {
+  npm run lint -s     # or npx eslint *.js, or whatever your lint command is
+  if [[ $? -ne 0 ]]
+  then
+    exit 1
+  fi
+}
+
+# Redirect output to stderr.
+exec 1>&2
+# enable user input
+exec < /dev/tty
+
+LRED='\033[1;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # NO COLOUR
+
+confirm () {  
+  printf "${YELLOW}"
+  read -rp "Continue with commit? (y/n) " yn
+  printf "${NC}"
+  if test "$yn" == "y" || test "$yn" == "Y"
+  then
+    printf "\n" # CONTINUE
+  else    
+    exit 1
+  fi
+}
+
+check_branch () {
+  if test "$(git branch --show-current)" == "master" || test "$(git branch --show-current)" == "main" || test "$(git branch --show-current)" == "development"
+  then
+    printf "You are on ${LRED}$(git branch --show-current)${NC}.\n"
+    confirm
+  fi
+}
+
+no_console () {
+  consoleRegexp='^[^-].*console.log'
+  filenameRegexp='^[^-].*console.log(\|^+++'
+
+  if test "$(git diff --cached | grep -c "$consoleRegexp")" != 0
+  then
+    git diff --cached | grep -ne "$filenameRegexp" | grep -B1 "$consoleRegexp"
+    printf "\nSome files include ${LRED}console.log${NC}.\n"
+    confirm
+  fi
+}
+
+no_debugger () {
+  debuggerRegexp='^[^-].*debugger'
+  filenameRegexp='^[^-].*debugger\|^+++'
+
+  if test "$(git diff --cached | grep -c "$debuggerRegexp")" != 0
+  then
+    printf "\nSome files include ${LRED}debugger${NC}.\n"
+    git diff --cached | grep -ne "$filenameRegexp" | grep -B1 "$debuggerRegexp"
+    confirm
+  fi
+}
+
+### RUN THROUGH CHECKS AND STOP IF THERE IS A PROBLEM
+run_linter
+check_branch
+no_console
+no_debugger
+
+printf "${GREEN}Proceeding with commit...${NC}\n"
