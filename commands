@@ -1,0 +1,11 @@
+1 npm init @eslint/config || yarn create @eslint/config
+2 npm install --save-dev eslint-plugin-simple-import-sort || yarn add eslint-plugin-simple-import-sort --save-dev 
+3 npm install --save-dev eslint eslint-plugin-unicorn || yarn add  eslint eslint-plugin-unicorn --save-dev
+4 npm install --save-dev --save-exact prettier || yarn add --dev --exact prettier 
+5 npm install --save-dev eslint-config-prettier || yarn add eslint-config-prettier --save-dev
+6   "lint": "eslint ./src --ext .js,.jsx",
+    "lint:fix": "eslint ./src --ext .js,.jsx --fix",
+7 npx husky-init && npm install
+8 npx husky set .husky/pre-commit "npm run lint -s && run test"
+9 npm install --save-dev eslint-plugin-prettier || yarn add eslint-plugin-prettier --save-dev
+10 npm install eslint-config-airbnb-typescript --save-dev || yarn add  eslint-config-airbnb-typescript --save-dev
