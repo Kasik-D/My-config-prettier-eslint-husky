@@ -1,8 +1,18 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+
+LRED='\033[1;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m' # No Color
+
+
 run_linter () {
-  npm run lint -s     # or npx eslint *.js, or whatever your lint command is
+  echo -e "${PURPLE}Linting the src folder ==> ${NC}${CYAN}Ext: .js, .jsx${NC}"
+  npx lint-staged     # or npx eslint *.js, or whatever your lint command is
   if [[ $? -ne 0 ]]
   then
     exit 1
@@ -13,11 +23,6 @@ run_linter () {
 exec 1>&2
 # enable user input
 exec < /dev/tty
-
-LRED='\033[1;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # NO COLOUR
 
 confirm () {  
   printf "${YELLOW}"
