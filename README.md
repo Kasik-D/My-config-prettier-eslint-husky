@@ -28,6 +28,13 @@
   5. И добавте следующие строки в файл package.json в поле scripts
     "lint": "eslint ./src --ext .js,.jsx", || "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint ./src --ext .js,.jsx --fix", || "lint:fix": "eslint ./src --ext .ts,.tsx --fix",
+  6. Так же нужно добавить после scripts в package.json
+   "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
      
   Приятного пользования 🥳
   
