@@ -11,7 +11,9 @@
  4. jsconfig.json || tsconfig.json - нужны для корректной работы всего конфига
 
 Чтобы воссоздать конфиг вам нужно:
-  1. Зайти в свой репозиторий и написать следующую команду `npm init @eslint/config` || `yarn create @eslint/config`
+  1. Зайти в свой репозиторий и написать следующую команду
+     \
+     `npm init @eslint/config` || `yarn create @eslint/config`
   2. Дольше вам нужно будет выбрать:
     \
     2.1 > To check syntax, find problems, and enforce code style
