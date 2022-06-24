@@ -9,5 +9,4 @@
 8   "lint": "eslint ./src --ext .js,.jsx",
     "lint:fix": "eslint ./src --ext .js,.jsx --fix",
 9 npx husky-init && npm install
-10 npx husky set .husky/pre-commit "npm run lint -s && run test"
 
