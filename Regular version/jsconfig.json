@@ -35,6 +35,6 @@
   "include": [
     "src/**/*.js",
     "src/**/*.jsx",
-    ".eslintrc.json"
+    ".eslintrc.js"
   ]
 }

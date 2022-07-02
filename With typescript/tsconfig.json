@@ -18,11 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "baseUrl": "./src"
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    ".eslintrc.json"
+    ".eslintrc.js"
   ]
 }
