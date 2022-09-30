@@ -8,7 +8,7 @@ module.exports = {
   // The order plays a role because the set of rules will extend or overwrite the previous ones.
   // https://stackoverflow.com/questions/46544082/it-this-the-correct-way-of-extending-eslint-rules#50370083
   extends: [
-    "react-app  ",
+    "react-app",
     "airbnb-base",
     "plugin:unicorn/recommended",
     "plugin:prettier/recommended",
